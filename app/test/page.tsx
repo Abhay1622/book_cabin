@@ -9,7 +9,7 @@ export default function Profile() {
 
   return (
     <div>
-      <p>Name: {session.user?.name}</p>
+      <p>Full Name: {session.user?.name}</p>
       <p>Email: {session.user?.email}</p>
     </div>
   );
