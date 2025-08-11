@@ -31,8 +31,8 @@ const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, gue
 
   const { data: session, status } = useSession();
 
+  // Updated: Removed early returns for session check to show calendar for all users
   if (status === "loading") return <p>Loading...</p>;
-  if (!session) return <p>Not logged in</p>;
 
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',

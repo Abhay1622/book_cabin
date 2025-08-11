@@ -65,7 +65,6 @@ const ReservationComponent: React.FC<ReservationProps> = ({ reservation }) => {
       method: 'DELETE',
     });
 
-    // Check if response is JSON
     const contentType = res.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
       const text = await res.text();

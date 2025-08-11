@@ -1,8 +1,29 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
+  // Updated: Added callback URL and refresh functionality
+  const handleGoogleSignIn = async () => {
+    await signIn("google", { 
+      callbackUrl: window.location.origin,
+      redirect: true 
+    });
+    router.refresh();
+  };
+
+  // Updated: Added callback URL and refresh functionality
+  const handleGitHubSignIn = async () => {
+    await signIn("github", { 
+      callbackUrl: window.location.origin,
+      redirect: true 
+    });
+    router.refresh();
+  };
+
   return (
     <div className="min-h-screen bg-[#141C24] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -12,7 +33,7 @@ export default function LoginPage() {
         
         <div className="space-y-4">
           <button
-             onClick={() => signIn("google")}
+            onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-4 px-6 py-4 bg-slate-700/50 hover:bg-slate-600/50 border border-slate-600 rounded-lg transition-all duration-200 text-white font-medium backdrop-blur-sm"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -37,7 +58,7 @@ export default function LoginPage() {
           </button>
 
           <button
-           onClick={() => signIn("github")}
+            onClick={handleGitHubSignIn}
             className="w-full flex items-center justify-center gap-4 px-6 py-4 bg-slate-700/50 hover:bg-slate-600/50 border border-slate-600 rounded-lg transition-all duration-200 text-white font-medium backdrop-blur-sm"
           >
             <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
@@ -50,5 +71,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
