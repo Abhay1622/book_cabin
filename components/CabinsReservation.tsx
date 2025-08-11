@@ -140,6 +140,12 @@ const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, gue
       return;
     }
 
+    // Updated: Added session null check
+    if (!session) {
+      alert('Please log in to make a reservation');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -337,7 +343,7 @@ const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, gue
                 <div className="flex items-center justify-between mb-2 p-2 bg-[#2C3D4F]">
                   <div className="text-slate-300 text-lg">Logged in as</div>
                   <div className="flex items-center gap-3">
-                    {session.user?.image ? (
+                    {session?.user?.image ? (
                       <img
                         src={session?.user?.image}
                         alt="Profile"
@@ -345,13 +351,13 @@ const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, gue
                       />
                     ) : (
                       <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                        {session.user?.name?.[0]?.toUpperCase() ||
-                          session.user?.email?.[0]?.toUpperCase() ||
+                        {session?.user?.name?.[0]?.toUpperCase() ||
+                          session?.user?.email?.[0]?.toUpperCase() ||
                           '👤'}
                       </div>
                     )}
                     <span className="text-slate-300 text-lg">
-                      {session.user?.name || session.user?.email}
+                      {session?.user?.name || session?.user?.email}
                     </span>
                   </div>
                 </div>
