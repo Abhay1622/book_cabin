@@ -87,11 +87,13 @@ const ReservationComponent: React.FC<ReservationProps> = ({ reservation }) => {
   }
 };
 
+
+
   return (
     <div className="flex flex-col gap-2 mb-[1rem] sm:flex-row w-full items-stretch border border-slate-700 bg-[#141C24] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       <div className="flex-shrink-0 w-full sm:w-48 h-48 sm:h-auto relative">
         <Image
-          src={`/${reservation.cabinName.replace(/\s+/g, '-')}.webp`}
+          src={reservation.cabin?.image }
           alt={reservation.cabinName}
           fill
           sizes="(max-width: 640px) 100vw, 192px"

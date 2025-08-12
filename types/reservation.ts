@@ -1,4 +1,5 @@
 export interface Reservation {
+  cabin: any;
   id: string;
   cabinName: string;
   userId: string;

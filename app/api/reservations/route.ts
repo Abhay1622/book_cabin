@@ -20,7 +20,20 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(reservations);
+    const reservationsWithCabin = await Promise.all(
+      reservations.map(async (reservation) => {
+        const cabin = await prisma.cabin.findFirst({
+          where: { name: reservation.cabinName },
+          select: { image: true, name: true, id: true }
+        });
+        return {
+          ...reservation,
+          cabin
+        };
+      })
+    );
+
+    return NextResponse.json(reservationsWithCabin);
   } catch (error) {
     console.error('Error fetching reservations:', error);
     return NextResponse.json(
@@ -31,7 +44,6 @@ export async function GET(request: NextRequest) {
     await prisma.$disconnect();
   }
 }
-
 
 export async function POST(request: NextRequest) {
   try {
@@ -59,6 +71,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
+      );
+    }
+
+    const cabin = await prisma.cabin.findFirst({
+      where: { name: cabinName }
+    });
+
+    if (!cabin) {
+      return NextResponse.json(
+        { error: 'Cabin not found' },
+        { status: 404 }
       );
     }
 
@@ -131,19 +154,27 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    console.log('Reservation created successfully:', reservation);
+    const reservationWithCabin = {
+      ...reservation,
+      cabin: {
+        image: cabin.image,
+        name: cabin.name,
+        id: cabin.id
+      }
+    };
+
+    console.log('Reservation created successfully:', reservationWithCabin);
 
     return NextResponse.json(
       { 
         message: 'Reservation created successfully',
-        reservation: reservation
+        reservation: reservationWithCabin
       },
       { status: 201 }
     );
 
   } catch (error) {
     console.error('Error creating reservation:', error);
-    
     
     return NextResponse.json(
       { 
