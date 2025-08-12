@@ -56,21 +56,15 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/guest-area"
-                  className="flex items-center gap-2 hover:text-amber-300 transition-colors duration-200 pl-6 border-l border-slate-600"
+                  className="flex items-center gap-2 hover:text-amber-300 transition-colors duration-200  "
                 >
-                  {session?.user?.image ? (
+                  {session?.user?.image && (
                     <img
                       src={session.user.image}
                       alt="Profile"
                       className="w-10 h-10 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                      {session?.user?.name?.[0]?.toUpperCase() ||
-                        session?.user?.email?.[0]?.toUpperCase() ||
-                        '👤'}
-                    </div>
-                  )}
+                    />)
+                   }
                   <span className="text-sm lg:text-base hidden xl:block">Guest Area</span>
                 </Link>
               </li>

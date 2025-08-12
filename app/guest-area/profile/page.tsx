@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { User, Mail, Globe, CreditCard, Edit2, Save, X } from 'lucide-react';
 
-// Type definitions
+
 interface UserProfile {
   id: string;
   name: string;
@@ -48,7 +48,6 @@ export default function UserProfile() {
     nationalId: ''
   });
 
-  // Mock fetch - replace with your API call
   useEffect(() => {
     const fetchProfile = async () => {
       if (!session?.user?.email) return;
@@ -98,17 +97,9 @@ export default function UserProfile() {
     setError(null);
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Here you would make actual API call to update profile
-      // const response = await fetch('/api/profile', {
-      //   method: 'PUT',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
       
-      // Update local state
       setProfile(prev => prev ? {
         ...prev,
         ...formData
@@ -153,9 +144,8 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-[#141C24] py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#141C24] px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <div className="bg-[#1F2937] rounded-lg shadow-xl overflow-hidden">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-32 relative">
             <div className="absolute bottom-0 left-6 transform translate-y-1/2">
