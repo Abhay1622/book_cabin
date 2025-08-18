@@ -6,9 +6,10 @@ import React, { useEffect, useState } from 'react';
 interface ReservationBookingProps {
   cabinsName: string
   guests: number
+  cabinPrice : number
 }
 
-const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, guests }: ReservationBookingProps,) => {
+const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, guests ,cabinPrice }: ReservationBookingProps,) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date(2025, 7));
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -26,7 +27,7 @@ const ReservationBooking: React.FC<ReservationBookingProps> = ({ cabinsName, gue
     setGuestsNumber(arr);
   },[])
 
-  const pricePerNight: number = 2500;
+  const pricePerNight: number = cabinPrice;
   const currency: string = 'INR';
 
   const { data: session, status } = useSession();

@@ -85,7 +85,7 @@ const CabinDetailPage = async ({ params }: CabinDetailPageProps) => {
         </div>
       </div>
       <div>
-        <ReservationBooking cabinsName={cabin.name} guests={cabin.guests} />
+        <ReservationBooking cabinPrice = {cabin.price} cabinsName={cabin.name} guests={cabin.guests} />
       </div>
     </div>
   );

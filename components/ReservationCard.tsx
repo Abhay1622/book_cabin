@@ -3,6 +3,7 @@ import React from 'react';
 import { Edit, Trash2 } from 'lucide-react';
 import { Reservation } from '@/types/reservation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ReservationProps {
   reservation: Reservation;
@@ -136,15 +137,17 @@ const ReservationComponent: React.FC<ReservationProps> = ({ reservation }) => {
 
       {shouldShowButtons && (
         <div className="flex sm:flex-col gap-2 p-4 sm:p-5 border-t sm:border-t-0 sm:border-l border-slate-700">
+          <Link href={`/guest-area/reservation/edit/${reservation.id}`}>
           <button
-            className="flex items-center justify-center sm:justify-start gap-2 bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded text-slate-300 hover:text-white transition-colors text-sm font-medium flex-1 sm:flex-initial"
+            className="flex items-center justify-center sm:justify-start gap-2 w-full bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded text-slate-300 hover:text-white transition-colors text-sm font-medium flex-1 sm:flex-initial"
             aria-label="Edit reservation"
           >
             <Edit size={16} />
             <span>Edit</span>
           </button>
+          </Link>
           <button
-          onClick={handleDeleteReservation}
+            onClick={handleDeleteReservation}
             className="flex items-center justify-center sm:justify-start gap-2 bg-slate-700 hover:bg-red-600 px-3 py-2 rounded text-slate-300 hover:text-white transition-colors text-sm font-medium flex-1 sm:flex-initial"
             aria-label="Delete reservation"
           >
